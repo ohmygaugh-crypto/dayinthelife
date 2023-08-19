@@ -24,6 +24,7 @@ You can change the time duration by the setting form.
 ## Thanks to
 
 - @santiyounger suggested me to add pomodoro technique support for [obsidian-stopwatch-plugin](https://github.com/tokuhirom/obsidian-stopwatch-plugin)
+- Tokuhiro Matsuno, http://64p.org/ <tokuhirom@gmail.com>
 
 ### Manually installing the plugin
 
@@ -34,7 +35,7 @@ You can change the time duration by the setting form.
 
 The MIT License (MIT)
 
-Copyright © 2021 Tokuhiro Matsuno, http://64p.org/ <tokuhirom@gmail.com>
+Copyright © 2023 Seth McGaugh
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the “Software”), to deal
@@ -53,3 +54,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+
+basically I renamed everything to my linguistics and also found the MyLifeElements is the key to changing the visual that renders within the view using react!!!!!!

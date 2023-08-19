@@ -29,6 +29,7 @@
     "typescript": "^4.2.4"
   },
   "dependencies": {
+    "@nivo/calendar": "^0.83.0",
     "@types/react": "^17.0.3",
     "@types/react-dom": "17.0.2",
     "moment": "^2.29.1",

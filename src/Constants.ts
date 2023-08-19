@@ -1,1 +1,1 @@
-export const VIEW_TYPE_POMODORO = "online.tokuhirom.obsidian-pomodoro-plugin";
+export const VIEW_TYPE_CALENDAR = "online.seths?.obsidian-mylife-plugin";

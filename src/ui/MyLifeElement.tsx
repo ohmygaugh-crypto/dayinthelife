@@ -1,18 +1,20 @@
 import React from "react";
-import PomodoroTimerPlugin from "../../main";
+import MyLifePlugin from "../../main";
 import moment from "moment";
+import { Calendar }from "@nivo/calendar";
+import { calendarData } from "./data";
 
 enum Mode {
-  ModePomodoro,
+  ModeCalendar,
   ModeShortBreak,
   ModeLongBreak,
 }
 
-interface PomodoroTimerElementProps {
-  plugin: PomodoroTimerPlugin;
+interface MyLifeElementProps {
+  plugin: MyLifePlugin;
 }
 
-interface PomodoroTimerElementState {
+interface MyLifeElementState {
   mode: Mode;
   time: string;
 
@@ -20,21 +22,21 @@ interface PomodoroTimerElementState {
   remainMilliSeconds: number;
 }
 
-export class PomodoroTimerElement extends React.Component<
-  PomodoroTimerElementProps,
-  PomodoroTimerElementState
+export class MyLifeElement extends React.Component<
+  MyLifeElementProps,
+  MyLifeElementState
 > {
   private intervalId: number;
-  constructor(props: PomodoroTimerElementProps) {
+  constructor(props: MyLifeElementProps) {
     super(props);
     this.state = {
-      mode: Mode.ModePomodoro,
-      time: PomodoroTimerElement.getTimeString(
-        this.props.plugin.settings.pomodoroMinutes * 60 * 1000
+      mode: Mode.ModeCalendar,
+      time: MyLifeElement.getTimeString(
+        this.props.plugin.settings.calendarMinutes * 60 * 1000
       ),
       startedAt: null,
       remainMilliSeconds:
-        this.props.plugin.settings.pomodoroMinutes * 60 * 1000,
+        this.props.plugin.settings.calendarMinutes * 60 * 1000,
     };
   }
 
@@ -45,8 +47,8 @@ export class PomodoroTimerElement extends React.Component<
   }
 
   componentDidUpdate(
-    prevProps: Readonly<PomodoroTimerElementProps>,
-    prevState: Readonly<PomodoroTimerElementState>
+    prevProps: Readonly<MyLifeElementProps>,
+    prevState: Readonly<MyLifeElementState>
   ): void {
     if (
       prevState.startedAt !== this.state.startedAt ||
@@ -83,17 +85,44 @@ export class PomodoroTimerElement extends React.Component<
   }
 
   render(): JSX.Element {
+    
     return (
-      <div className={"pomodoro-timer"}>
+      <div className={"calendar-timer"}>
+        <Calendar 
+        data={calendarData}
+        from="2022-01-01"
+        to="2022-12-31"
+        height={400}
+        width={800}
+        emptyColor="#ffffff"
+        colors={["#61cdbb", "#97e3d5", "#e8c1a0", "#f47560"]}
+        margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
+        yearSpacing={40}
+        monthBorderColor="#ffffff"
+        dayBorderWidth={2}
+        dayBorderColor="#ffffff"
+        legends={[
+          {
+            anchor: 'bottom-right',
+            direction: 'row',
+            translateY: 36,
+            itemCount: 4,
+            itemWidth: 42,
+            itemHeight: 36,
+            itemsSpacing: 14,
+            itemDirection: 'right-to-left'
+          }
+        ]}
+      />
         <div className={"mode-switchers-container"}>
           <div
             className={
-              "pomodoro " +
-              (this.state.mode == Mode.ModePomodoro ? "enabled" : "")
+              "calendar " +
+              (this.state.mode == Mode.ModeCalendar ? "enabled" : "")
             }
-            onClick={this.switchToPomodoro.bind(this)}
+            onClick={this.switchToCalendar.bind(this)}
           >
-            Pomodoro
+            CalendarBINGBONG found in MyLifeElements.jsx
           </div>
           <div
             className={
@@ -102,7 +131,7 @@ export class PomodoroTimerElement extends React.Component<
             }
             onClick={this.switchToShortBreak.bind(this)}
           >
-            Short Break
+            Short BreakBINGBONG ound in MyLifeElements.jsx
           </div>
           <div
             className={
@@ -111,7 +140,7 @@ export class PomodoroTimerElement extends React.Component<
             }
             onClick={this.switchToLongBreak.bind(this)}
           >
-            Long Break
+            Long BreakBINGBONG ound in MyLifeElements.jsx
           </div>
         </div>
         <div
@@ -131,7 +160,7 @@ export class PomodoroTimerElement extends React.Component<
 
   private updateTime(): void {
     const ms = this.getElapsedMilliSeconds();
-    const str = PomodoroTimerElement.getTimeString(ms);
+    const str = MyLifeElement.getTimeString(ms);
     this.setState({
       time: str,
     });
@@ -153,8 +182,8 @@ export class PomodoroTimerElement extends React.Component<
     }
   }
 
-  switchToPomodoro(): void {
-    this.switchMode(Mode.ModePomodoro);
+  switchToCalendar(): void {
+    this.switchMode(Mode.ModeCalendar);
   }
 
   switchToShortBreak(): void {
@@ -195,8 +224,8 @@ export class PomodoroTimerElement extends React.Component<
   private getRemainMilliSecondsByMode(mode: Mode): number {
     const plugin = this.props.plugin;
     switch (mode) {
-      case Mode.ModePomodoro:
-        return plugin.settings.pomodoroMinutes * 60 * 1000;
+      case Mode.ModeCalendar:
+        return plugin.settings.calendarMinutes * 60 * 1000;
       case Mode.ModeShortBreak:
         return plugin.settings.shortBreakMinutes * 60 * 1000;
       case Mode.ModeLongBreak:

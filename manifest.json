@@ -1,10 +1,17 @@
 {
-	"id": "obsidian-pomodoro-plugin",
-	"name": "Pomodoro Plugin",
-	"version": "0.0.2",
-	"minAppVersion": "0.9.12",
-	"description": "This is a simple pomodoro plugin for Obsidian.",
-	"author": "Tokuhiro Matsuno",
-	"authorUrl": "https://github.com/tokuhirom/",
+	"id": "obsidian-life-in-weeks2",
+	"icon": "styles/skull.svg",
+	"name": "Life in Weeks2.0",
+	"version": "1.0.1",
+	"minAppVersion": "0.15.0",
+	"description": "Visualize your life in weeks, inspired by Wait But Why. This is a sample plugin for Obsidian. This plugin demonstrates some of the capabilities of the Obsidian API.",
+	"author": "Seth",
+	"authorUrl": "https://obsidian.md",
+	"fundingUrl": {
+        "Buy Me a Coffee": "https://buymeacoffee.com",
+        "GitHub Sponsor": "https://github.com/sponsors",
+        "Patreon": "https://www.patreon.com/"
+    },
 	"isDesktopOnly": false
+
 }

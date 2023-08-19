@@ -5,43 +5,43 @@ import {
   Setting,
   WorkspaceLeaf,
 } from "obsidian";
-import { VIEW_TYPE_POMODORO } from "./src/Constants";
-import { PomodoroTimerView } from "./src/PomodoroTimerView";
+import { VIEW_TYPE_CALENDAR } from "./src/Constants";
+import { MyLifeView } from "./src/LifeCalendarView";
 
 import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
 
 momentDurationFormatSetup(moment);
 
-interface PomodoroTimerPluginSettings {
-  pomodoroMinutes: number;
+interface MyLifePluginSettings {
+  calendarMinutes: number;
   shortBreakMinutes: number;
   longBreakMinutes: number;
 }
 
-const DEFAULT_SETTINGS: PomodoroTimerPluginSettings = {
-  pomodoroMinutes: 25,
+const DEFAULT_SETTINGS: MyLifePluginSettings = {
+  calendarMinutes: 25,
   shortBreakMinutes: 5,
   longBreakMinutes: 15,
 };
 
-export default class PomodoroTimerPlugin extends Plugin {
-  settings: PomodoroTimerPluginSettings;
+export default class MyLifePlugin extends Plugin {
+  settings: MyLifePluginSettings;
 
   async onload(): Promise<void> {
-    console.log("loading PomodoroTimerPlugin");
+    console.log("loading MyLifePlugin");
 
     await this.loadSettings();
 
-    this.addSettingTab(new PomodoroSettingTab(this.app, this));
+    this.addSettingTab(new CalendarSettingTab(this.app, this));
 
-    this.registerView(VIEW_TYPE_POMODORO, (leaf: WorkspaceLeaf) => {
-      return new PomodoroTimerView(leaf, this);
+    this.registerView(VIEW_TYPE_CALENDAR, (leaf: WorkspaceLeaf) => {
+      return new MyLifeView(leaf, this);
     });
 
     this.addCommand({
-      id: 'pomodoro-show-pomodoro-timer',
-      name: "Show pomodoro timer",
+      id: 'calendar-show-calendar-timer',
+      name: "Show calendar timer",
       mobileOnly: false,
       callback: this.onShow.bind(this)
     });
@@ -54,15 +54,15 @@ export default class PomodoroTimerPlugin extends Plugin {
   }
 
   onunload(): void {
-    console.log("unloading PomodoroTimerPlugin");
+    console.log("unloading MyLifePlugin");
   }
 
   initLeaf(): void {
-    if (this.app.workspace.getLeavesOfType(VIEW_TYPE_POMODORO).length) {
+    if (this.app.workspace.getLeavesOfType(VIEW_TYPE_CALENDAR).length) {
       return;
     }
     this.app.workspace.getRightLeaf(false).setViewState({
-      type: VIEW_TYPE_POMODORO,
+      type: VIEW_TYPE_CALENDAR,
     });
   }
 
@@ -75,10 +75,10 @@ export default class PomodoroTimerPlugin extends Plugin {
   }
 }
 
-class PomodoroSettingTab extends PluginSettingTab {
-  plugin: PomodoroTimerPlugin;
+class CalendarSettingTab extends PluginSettingTab {
+  plugin: MyLifePlugin;
 
-  constructor(app: App, plugin: PomodoroTimerPlugin) {
+  constructor(app: App, plugin: MyLifePlugin) {
     super(app, plugin);
     this.plugin = plugin;
   }
@@ -88,15 +88,15 @@ class PomodoroSettingTab extends PluginSettingTab {
 
     containerEl.empty();
 
-    const pomodoroSettings = new Setting(containerEl)
-      .setName("Pomodoro duration minutes")
-      .setDesc(`${this.plugin.settings.pomodoroMinutes} minutes`)
+    const calendarSettings = new Setting(containerEl)
+      .setName("Calendar duration minutes")
+      .setDesc(`${this.plugin.settings.calendarMinutes} minutes`)
       .addSlider((text) =>
         text
-          .setValue(this.plugin.settings.pomodoroMinutes)
+          .setValue(this.plugin.settings.calendarMinutes)
           .onChange(async (value) => {
-            this.plugin.settings.pomodoroMinutes = value;
-            pomodoroSettings.setDesc(`${value} minutes`);
+            this.plugin.settings.calendarMinutes = value;
+            calendarSettings.setDesc(`${value} minutes`);
             await this.plugin.saveSettings();
           })
       );
