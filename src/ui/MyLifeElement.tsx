@@ -82,6 +82,7 @@ export class MyLifeElement extends React.Component<
       this.createInterval();
     }
   }
+
 //I WANT TO ADD DAILY NOTE TAKING/TOPICAL BACKLINK TIMESTAMP TRACKING FUNCTIONALITY HERE
   render(): JSX.Element {
     //I need to turn the below into a seperate file and import it back here neatly
