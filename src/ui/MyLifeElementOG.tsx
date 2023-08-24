@@ -1,7 +1,8 @@
 import React from "react";
 import MyLifePlugin from "../../main";
 import moment from "moment";
-import { MyResponsiveCalendarCanvas }from "./NivoRocks";
+import { Calendar }from "@nivo/calendar";
+import { calendarData } from "./exampledata";
 
 enum Mode {
   ModeCalendar,
@@ -86,55 +87,74 @@ export class MyLifeElement extends React.Component<
   render(): JSX.Element {
     //I need to turn the below into a seperate file and import it back here neatly
     return (
-        <>
-        <div>
-            <MyResponsiveCalendarCanvas />
-        </div>
-            <div className={"calendar-timer"}>
-            <div className={"mode-switchers-container"}>
-            <div
-                className={
-                "calendar " +
-                (this.state.mode == Mode.ModeCalendar ? "enabled" : "")
-                }
-                onClick={this.switchToCalendar.bind(this)}
-            >
-                CalendarBINGBONG found in MyLifeElements.jsx
-            </div>
-            <div
-                className={
-                "short-break " +
-                (this.state.mode == Mode.ModeShortBreak ? "enabled" : "")
-                }
-                onClick={this.switchToShortBreak.bind(this)}
-            >
-                Short BreakBINGBONG ound in MyLifeElements.jsx
-            </div>
-            <div
-                className={
-                "long-break " +
-                (this.state.mode == Mode.ModeLongBreak ? "enabled" : "")
-                }
-                onClick={this.switchToLongBreak.bind(this)}
-            >
-                Long BreakBINGBONG ound in MyLifeElements.jsx
-            </div>
-            </div>
-            <div
+      <div className={"calendar-timer"}>
+        <Calendar 
+        data={calendarData}
+        from="2021-01-01"
+        to="2024-12-31"
+        height={1400}
+        width={800}
+        emptyColor="#gggggg"
+        colors={["#61cdbb", "#97e3d5", "#e8c1a0", "#f47560"]}
+        margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
+        yearSpacing={40}
+        monthBorderColor="#ffffff"
+        dayBorderWidth={2}
+        dayBorderColor="#ffffff"
+        legends={[
+          {
+            anchor: 'bottom-right',
+            direction: 'row',
+            translateY: 36,
+            itemCount: 4,
+            itemWidth: 42,
+            itemHeight: 36,
+            itemsSpacing: 14,
+            itemDirection: 'right-to-left'
+          }
+        ]}
+      />
+        <div className={"mode-switchers-container"}>
+          <div
             className={
-                "time " + (this.getElapsedMilliSeconds() < 0 ? "over" : "")
+              "calendar " +
+              (this.state.mode == Mode.ModeCalendar ? "enabled" : "")
             }
-            >
-            {this.state.time}
-            </div>
-            <button onClick={this.onStartStop.bind(this)}>
-            {this.state.startedAt !== null ? "Stop" : "Start"}
-            </button>
-            <button onClick={this.onReset.bind(this)}>▶|</button>
+            onClick={this.switchToCalendar.bind(this)}
+          >
+            CalendarBINGBONG found in MyLifeElements.jsx
+          </div>
+          <div
+            className={
+              "short-break " +
+              (this.state.mode == Mode.ModeShortBreak ? "enabled" : "")
+            }
+            onClick={this.switchToShortBreak.bind(this)}
+          >
+            Short BreakBINGBONG ound in MyLifeElements.jsx
+          </div>
+          <div
+            className={
+              "long-break " +
+              (this.state.mode == Mode.ModeLongBreak ? "enabled" : "")
+            }
+            onClick={this.switchToLongBreak.bind(this)}
+          >
+            Long BreakBINGBONG ound in MyLifeElements.jsx
+          </div>
         </div>
-        </>
-        
-      
+        <div
+          className={
+            "time " + (this.getElapsedMilliSeconds() < 0 ? "over" : "")
+          }
+        >
+          {this.state.time}
+        </div>
+        <button onClick={this.onStartStop.bind(this)}>
+          {this.state.startedAt !== null ? "Stop" : "Start"}
+        </button>
+        <button onClick={this.onReset.bind(this)}>▶|</button>
+      </div>
     );
   }
 
