@@ -14,7 +14,7 @@ export class MyLifeView extends ItemView {
   }
 
   getDisplayText(): string {
-    return "Your Life In Weeks";
+    return "Day In The Life";
   }
 
   getViewType(): string {

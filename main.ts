@@ -15,12 +15,14 @@ import {
   momentDurationFormatSetup(moment);
   
   interface MyLifePluginSettings {
+    DOB: string;
     calendarYears: number;
-    gender: 'Male' | 'Female';
+    gender: 'Male' | 'Female' | 'Other';
     netWorth: number;
 }
 
 const DEFAULT_SETTINGS: MyLifePluginSettings = {
+    DOB: '2000-01-01',
     calendarYears: 60,
     gender: 'Male',
     netWorth: 0,
@@ -89,18 +91,17 @@ class CalendarSettingTab extends PluginSettingTab {
 
         containerEl.empty();
 
-        const calendarSettings = new Setting(containerEl)
-            .setName("Calendar years")
-            .setDesc(`${this.plugin.settings.calendarYears} years`)
-            .addSlider((text) =>
-                text
-                    .setValue(this.plugin.settings.calendarYears)
-                    .onChange(async (value) => {
-                        this.plugin.settings.calendarYears = value;
-                        calendarSettings.setDesc(`${value} years`);
-                        await this.plugin.saveSettings();
-                    })
-            );
+        const DOBSettings = new Setting(containerEl)
+            .setName('Date of Birth')
+            .setDesc('Enter your date of birth.')
+            .addText(text => text
+                .setPlaceholder('YYYY-MM-DD')
+                .setValue(this.plugin.settings.DOB)
+                .onChange(async (value) => {
+                    this.plugin.settings.DOB = value;
+                    await this.plugin.saveSettings();
+                }));
+
 
         const genderSettings = new Setting(containerEl)
             .setName("Gender")
@@ -109,9 +110,10 @@ class CalendarSettingTab extends PluginSettingTab {
                 dropdown
                     .addOption('Male', 'Male')
                     .addOption('Female', 'Female')
+                    .addOption('Other', 'Other')
                     .setValue(this.plugin.settings.gender)
                     .onChange(async (value) => {
-                        this.plugin.settings.gender = value as 'Male' | 'Female';
+                        this.plugin.settings.gender = value as 'Male' | 'Female' | 'Other';
                         genderSettings.setDesc(value);
                         await this.plugin.saveSettings();
                     })

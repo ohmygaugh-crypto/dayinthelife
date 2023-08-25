@@ -2,7 +2,6 @@
 // install (please try to align the version of installed @nivo packages)
 // yarn add @nivo/calendar
 import { Calendar } from '@nivo/calendar'
-import { calendarData } from './exampledata'
 import React from 'react';
 import * as obsidian from 'obsidian';
 //import CustomTooltip from './CustomTooltip';
@@ -54,13 +53,37 @@ export const MyResponsiveCalendarCanvas: React.FC = () => {
         fetchData();
     }, []);
 
+    const settings = window.app.plugins.plugins["obsidian-life-in-weeks2"].settings;
+    
+    const currentYear = new Date().getFullYear();
+    const birthYear = new Date(settings.DOB).getFullYear();
+    let lifespan;
+    const settingsGender = settings.gender; // Corrected this line
+
+    switch(settingsGender) {
+        case 'Male':
+            lifespan = 76;
+            break;
+        case 'Female':
+            lifespan = 81;
+            break;
+        case 'Other':
+            lifespan = 78.5; // This is an example. Adjust based on your preferred average.
+            break;
+    }
+
+
+    const from = `${birthYear}-01-01`;
+    const to = `${birthYear + lifespan}-12-31`;
+
+
 
 return (
     <Calendar
         data={calendarData}
        // tooltip={CustomTooltip}
-        from="1996-01-01"
-        to="2050-12-31"
+        from={from}
+        to={to}
         emptyColor="#gggggg"
         colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
         margin={{ top: 40, right: 40, bottom: 50, left: 40 }}
