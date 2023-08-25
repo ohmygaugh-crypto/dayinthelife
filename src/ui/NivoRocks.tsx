@@ -5,6 +5,8 @@ import { Calendar } from '@nivo/calendar'
 import { calendarData } from './exampledata'
 import React from 'react';
 import * as obsidian from 'obsidian';
+//import CustomTooltip from './CustomTooltip';
+import { generateCalendarData, openObsidianDailyNote } from './DailyNoteAnalyzer';
 
 // Assuming you have Obsidian's types available, you might need to adjust types based on your setup.
 declare const window: any;
@@ -30,34 +32,33 @@ const openObsidianDailyNote = (filename: string) => {
     }
 };
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
-//I want to make this a interactive component. I want to add a daily note taking/topical backlink timestamp tracking functionality here that is activated any time I click a timebox within the calendarcanvas.
-//make the from - to dates dynamic and interactive with the calendarData based on the current date and date of birth. have this entered in the settings.
-export const MyResponsiveCalendarCanvas: React.FC = () => { // Corrected the function definition
- // ... other states and methods
+
+export const MyResponsiveCalendarCanvas: React.FC = () => { 
 
  const handleDayClick = (day: any) => {
     console.log("Clicked on:", day.date); // Debug log
     // Format the date to YYYY-MM-DD
     const formattedDate = day.date.toISOString().split('T')[0];
     const dailyNoteFilename = `${formattedDate}.md`;
-
-   
-
     // Navigate to the daily note in Obsidian
-    // This is a hypothetical method; you'll need to replace it with the actual method to open a note in Obsidian
     openObsidianDailyNote(dailyNoteFilename);
     };
-//for the calendar properties from={DOB} & to={male | female} these parameters should be dynamic and interactive with the calendarData based on the current date and date of birth. have this entered in the settings.
-//also data={calendarData} should be dynamic and interactive based on file activity in obsidian.
-//calnedarData should makeup be other custom viz logic based on setting properties defined in the settings tab.
+
+    const [calendarData, setCalendarData] = React.useState([]);
+
+    React.useEffect(() => {
+        async function fetchData() {
+            const data = await generateCalendarData();
+            setCalendarData(data);
+        }
+        fetchData();
+    }, []);
+
+
 return (
     <Calendar
         data={calendarData}
+       // tooltip={CustomTooltip}
         from="1996-01-01"
         to="2050-12-31"
         emptyColor="#gggggg"
