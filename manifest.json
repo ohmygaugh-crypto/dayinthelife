@@ -1,7 +1,7 @@
 {
-	"id": "obsidian-life-in-weeks2",
+	"id": "obsidian-life-in-weeks3",
 	"icon": "styles/skull.svg",
-	"name": "Life in Weeks2.0",
+	"name": "Life in Weeks3.0",
 	"version": "1.0.1",
 	"minAppVersion": "0.15.0",
 	"description": "Visualize your life in weeks, inspired by Wait But Why. This is a sample plugin for Obsidian. This plugin demonstrates some of the capabilities of the Obsidian API.",

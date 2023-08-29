@@ -53,7 +53,7 @@ export const MyResponsiveCalendarCanvas: React.FC = () => {
         fetchData();
     }, []);
 
-    const settings = window.app.plugins.plugins["obsidian-life-in-weeks2"].settings;
+    const settings = window.app.plugins.plugins["obsidian-life-in-weeks3"].settings;
     
     const currentYear = new Date().getFullYear();
     const birthYear = new Date(settings.DOB).getFullYear();
@@ -76,11 +76,25 @@ export const MyResponsiveCalendarCanvas: React.FC = () => {
     const from = `${birthYear}-01-01`;
     const to = `${birthYear + lifespan}-12-31`;
 
+ // Adjust the Theme Based on System Theme
+ const isDarkMode = window.app.workspace.appearance === "dark";
+ const textColor = isDarkMode ? "#ffffff" : "#000000";
 
+ const customTheme = {
+     background: isDarkMode ? "#333333" : "#ffffff", // Example: Dark gray for dark mode, White for light mode
+     text: {
+         fontSize: 12,
+         fill: textColor,
+         outlineWidth: 3,
+         outlineColor: isDarkMode ? "#333333" : "#000000", // Adjust as needed
+     },
+     // ... (continue adjusting other properties as needed)
+ };
 
 return (
     <Calendar
         data={calendarData}
+        onClick={handleDayClick}
        // tooltip={CustomTooltip}
         from={from}
         to={to}
@@ -90,9 +104,10 @@ return (
         direction="horizontal"
         yearSpacing={10}
         monthBorderColor="#ffffff"
-        dayBorderWidth={0}
+        monthLegendOffset={0.1}
+        dayBorderWidth={0.2}
         dayBorderColor="#ffffff"
-        onClick={handleDayClick}
+        theme={customTheme}
         legends={[
             {
                 anchor: 'bottom-right',

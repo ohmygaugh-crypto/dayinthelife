@@ -32,7 +32,7 @@ export default class MyLifePlugin extends Plugin {
     settings: MyLifePluginSettings;
 
     async onload(): Promise<void> {
-        console.log("loading MyLifePlugin");
+        console.log("loading DayInTheLifePlugin");
 
         await this.loadSettings();
 
@@ -57,7 +57,7 @@ export default class MyLifePlugin extends Plugin {
     }
 
     onunload(): void {
-        console.log("unloading MyLifePlugin");
+        console.log("unloading DayInTheLifePlugin");
     }
 
     initLeaf(): void {

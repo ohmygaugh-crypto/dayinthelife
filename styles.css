@@ -36,3 +36,20 @@
 .pomodoro-timer .time.over {
     color: red;
 }
+
+
+.theme-dark .calendar-year-label {
+    fill: white;
+}
+
+.theme-light .calendar-year-label {
+    fill: black;
+}
+
+.theme-dark .calendar-month-label {
+    fill: white;
+}
+
+.theme-light .calendar-month-label {
+    fill: black;
+}
