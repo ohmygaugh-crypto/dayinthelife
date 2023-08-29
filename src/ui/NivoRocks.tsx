@@ -1,6 +1,3 @@
-//YOU ACTUALLY DONT NEED THIS FILE RIGHT NOW, BUT I WANTED TO KEEP IT FOR FUTURE REFERENCE
-// install (please try to align the version of installed @nivo packages)
-// yarn add @nivo/calendar
 import { Calendar } from '@nivo/calendar'
 import React from 'react';
 import * as obsidian from 'obsidian';
