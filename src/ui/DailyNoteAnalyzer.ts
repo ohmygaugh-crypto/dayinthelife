@@ -4,11 +4,27 @@ export function isDailyNoteFormat(filename: string): boolean {
     return /^\d{4}-\d{2}-\d{2}$/.test(filename);
 }
 
-export async function analyzeNoteContent(file: TFile): Promise<number> {
+export async function analyzeNoteContent(file: TFile): Promise<{ wordCount: number, backlinkCount: number, tagCount: number }> {
     const content = await window.app.vault.read(file);
-    // For simplicity, let's just return the word count for now
-    // You can expand this to analyze other aspects of the content
-    return content.split(/\s+/).length;
+    
+    // Word count
+    const wordCount = content.split(/\s+/).length;
+
+    // Backlink count
+    const backlinkPattern = /\[\[([^\]]+)\]\]/g;
+    const backlinks = content.match(backlinkPattern);
+    const backlinkCount = backlinks ? backlinks.length : 0;
+
+    // Tag count
+    const tagPattern = /#[\w-]+/g;
+    const tags = content.match(tagPattern);
+    const tagCount = tags ? tags.length : 0;
+
+    return {
+        wordCount,
+        backlinkCount,
+        tagCount
+    };
 }
 
 export async function generateCalendarData(): Promise<any[]> {
@@ -23,10 +39,12 @@ export async function generateCalendarData(): Promise<any[]> {
 
     const calendarData = [];
     for (const note of dailyNotes) {
-        const value = await analyzeNoteContent(note);
+        const { wordCount, backlinkCount, tagCount } = await analyzeNoteContent(note);
         calendarData.push({
             day: note.basename,
-            value: value
+            value: wordCount, // or any other metric you want to represent on the calendar
+            backlinks: backlinkCount,
+            tags: tagCount
         });
     }
 
@@ -45,3 +63,4 @@ export function openObsidianDailyNote(filename: string) {
         });
     }
 }
+
