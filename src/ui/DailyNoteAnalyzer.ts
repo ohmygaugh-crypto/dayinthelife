@@ -4,27 +4,13 @@ export function isDailyNoteFormat(filename: string): boolean {
     return /^\d{4}-\d{2}-\d{2}$/.test(filename);
 }
 
-export async function analyzeNoteContent(file: TFile): Promise<{ wordCount: number, backlinkCount: number, tagCount: number }> {
+export async function analyzeNoteContent(file: TFile): Promise<{ wordCount: number, backlinks: number, tags: number, hyperlinks: number }> {
     const content = await window.app.vault.read(file);
-    
-    // Word count
     const wordCount = content.split(/\s+/).length;
-
-    // Backlink count
-    const backlinkPattern = /\[\[([^\]]+)\]\]/g;
-    const backlinks = content.match(backlinkPattern);
-    const backlinkCount = backlinks ? backlinks.length : 0;
-
-    // Tag count
-    const tagPattern = /#[\w-]+/g;
-    const tags = content.match(tagPattern);
-    const tagCount = tags ? tags.length : 0;
-
-    return {
-        wordCount,
-        backlinkCount,
-        tagCount
-    };
+    const backlinks = (content.match(/\[\[[^\]]+\]\]/g) || []).length;
+    const tags = (content.match(/#[^\s#]+/g) || []).length;
+    const hyperlinks = (content.match(/https?:\/\/[^\s]+/g) || []).length;
+    return { wordCount, backlinks, tags, hyperlinks };
 }
 
 export async function generateCalendarData(): Promise<any[]> {
@@ -39,12 +25,13 @@ export async function generateCalendarData(): Promise<any[]> {
 
     const calendarData = [];
     for (const note of dailyNotes) {
-        const { wordCount, backlinkCount, tagCount } = await analyzeNoteContent(note);
+        const { wordCount, backlinks, tags, hyperlinks } = await analyzeNoteContent(note);
         calendarData.push({
             day: note.basename,
-            value: wordCount, // or any other metric you want to represent on the calendar
-            backlinks: backlinkCount,
-            tags: tagCount
+            value: wordCount,
+            backlinks: backlinks,
+            tags: tags,
+            hyperlinks: hyperlinks
         });
     }
 
@@ -63,4 +50,3 @@ export function openObsidianDailyNote(filename: string) {
         });
     }
 }
-

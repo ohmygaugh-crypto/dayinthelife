@@ -5,9 +5,10 @@ interface CustomTooltipProps {
     value: number | null;
     backlinks: number;
     tags: number;
+    hyperlinks: number;
 }
 
-const CustomTooltip: React.FC<CustomTooltipProps> = ({ day, value, backlinks, tags }) => {
+const CustomTooltip: React.FC<CustomTooltipProps> = ({ day, value, backlinks, tags, hyperlinks }) => {
     return (
         <div style={{ padding: '12px', color: 'white', background: 'rgba(0, 0, 0, 0.8)' }}>
             <strong>{day}</strong>
@@ -17,9 +18,10 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ day, value, backlinks, ta
             {`Backlinks: ${backlinks}`}
             <br />
             {`Tags: ${tags}`}
+            <br />
+            {`Hyperlinks: ${hyperlinks}`}
         </div>
     );
 };
 
 export default CustomTooltip;
-
