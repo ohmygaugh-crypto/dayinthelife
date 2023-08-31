@@ -13,11 +13,6 @@ export class MyLifeElement extends React.Component<MyLifeElementProps> {
         <div>
           <MyResponsiveCalendarCanvas />
         </div>
-        <div className={"button-container"}>
-          <button>Simple Button 1</button>
-          <button>Simple Button 2</button>
-          <button>Simple Button 3</button>
-        </div>
       </>
     );
   }
