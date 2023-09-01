@@ -24,6 +24,7 @@ Future State:
 	- fix graph conflict
 I intend to add more subjects of reflection, trajectory markers, and a multitude of other optics from which you can compare yourself against your goals, accomplishments, and life outlooks in a truthful way. I want people to journal & goal set when considering how aligned your reality is with the trajectory you wish to accomplish. For now this app only showcases the word count you've submitted on each daily note as a metric for self progress. 
 
+Add newsticker or loading splash screen reminders with inspirational quotes like: 
 
 "Your perspective is your reality"
 
