@@ -1,0 +1,8 @@
+{
+    "id": "day in the life",
+	"icon": "styles/skull.svg",
+	"name": "Day In The Life",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Visualize your life. Carpe Diem."
+}
