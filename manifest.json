@@ -1,16 +1,15 @@
 {
-	"id": "obsidian-life-in-weeks4",
+	"id": "day in the life",
 	"icon": "styles/skull.svg",
-	"name": "Life in Weeks4.0",
-	"version": "1.0.3",
+	"name": "Day In The Life",
+	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Visualize your life in weeks, inspired by Wait But Why. This is a sample plugin for Obsidian. This plugin demonstrates some of the capabilities of the Obsidian API. Day in the life",
+	"description": "Visualize your life. Carpe Diem.",
 	"author": "Seth",
 	"authorUrl": "https://obsidian.md",
 	"fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
+        "Buy Me a Coffee": "https://www.buymeacoffee.com/ohmygaugh",
         "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
     },
 	"isDesktopOnly": false
 

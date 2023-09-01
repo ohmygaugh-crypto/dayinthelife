@@ -50,7 +50,7 @@ export const MyResponsiveCalendarCanvas: React.FC = () => {
         fetchData();
     }, []);
 
-    const settings = window.app.plugins.plugins["obsidian-life-in-weeks4"].settings;
+    const settings = window.app.plugins.plugins["day in the life"].settings;
     
     const currentYear = new Date().getFullYear();
     const birthYear = new Date(settings.DOB).getFullYear();
