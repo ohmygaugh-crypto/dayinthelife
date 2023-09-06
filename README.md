@@ -1,10 +1,14 @@
 ## Obsidian Day-in-the-life Plugin
 
-The "Day in the Life" is a simple life Calendar plugin for Obsidian (https://obsidian.md).
+The "Day in the Life" calendar is a simple Calendar plugin for Obsidian (https://obsidian.md).
 
-Inspired by the "Your-Life-in Weeks" Calendar by Tim Urban on his popular blog Wait But Why? This plugin aims to expand upon these optics in a configurable, light-hearted way.
+Inspired by the "Your-Life-in Weeks" calendar by Tim Urban on his popular blog "Wait But Why?". This plugin aims to expand upon these optics in a configurable, light-hearted way.
 
-With the "Day in the Life" plugin, you can better evaluate your time management by candidly staring at how much life you've already lived(and wont get back) moreover, how much time you have left to reach your goals. 
+If you are not familiar with this calendar, see the original:
+
+> https://waitbutwhy.com/2014/05/life-weeks.html
+
+With the "Day in the Life" plugin, you can more relevantly evaluate your time management by candidly staring at how much life you've already lived(and won't get back) given your unique circumstances. Moreover, a reminder of the amount time you have left to reach your goals. 
 
  I always found it both striking and grounding to stare at the simplicity of this calendar which many consider a piece of art. It helps me stand in my truth when comparing my sense of trajectory. It's scary, humbling, and energizing to comprehend how I might utilize the rest of my days and perhaps even make up for lost time. People define their reality often by milestones (of arbitrary value) by a certain age(s). I hope plugin serves as a stark reminder of life's brevity and that it helps inspire you to seize the day like it does for me.
 
@@ -17,14 +21,17 @@ How to use:
 - Then "On Click" you will open that daily note in a separate tab. 
 - Within the settings are whimsical data entry fields that go into a calculation that projects the range of your lifespan onto the calendar (this has nothing to do with your *actual* likelihood of longevity. It's a rudimentary measuring stick based on historical evidence of the average human.) 
 
+![Alt text](src/media/dayinthelife.png)
 
 Future State:
-- 52 week calenar(consolidate aesthetics into a view that doesn't require scrolling)
-- reduce memory leakage
-	- fix graph conflict
-I intend to add more subjects of reflection, trajectory markers, and a multitude of other optics from which you can compare yourself against your goals, accomplishments, and life outlooks in a truthful way. I want people to journal & goal set when considering how aligned your reality is with the trajectory you wish to accomplish. For now this app only showcases the word count you've submitted on each daily note as a metric for self progress. 
-
-Add newsticker or loading splash screen reminders with inspirational quotes like: 
+- Adjustable/dynamic calendar views to increase and decrease granularity of the calendar
+	- 24 hour calendar
+	- 7 day calendar 
+	- 52 week calenar(life in weeks grid/consolidate aesthetics into a view that doesn't require any scrolling)
+- Reduce memory leakage and performance issues I am experiencing with the nivo library.
+	- especially, fix graph conflict. I am currently using the nivo library to render the calendar. I am having issues with the graph rendering on top of the calendar. I am not sure if this is a z-index issue or something else. I am not sure if I will continue to use the nivo library or if I will just use the calendar library. I am open to suggestions.
+- More optics. In the settings there will be more input fields to configure your outlook on your timeline. I intend to add more subjects of reflection, average life milestones, finacial trajectory markers, and a multitude of other optics perteninnet to planning your human experience optimally. Again, this is so that you can compare yourself against your goals, accomplishments, and life outlooks in a truthful way. I want people to journal & goal set when considering how aligned your reality is with the trajectory you wish to accomplish. For now this app only showcases the word count you've submitted on each daily note as a metric for self progress. 
+- Add newsticker or loading splash screen reminders with inspirational quotes like: 
 
 "Your perspective is your reality"
 
@@ -32,18 +39,10 @@ Add newsticker or loading splash screen reminders with inspirational quotes like
 
 "carpe diem"
 
-with purpose costa rican expression
+etc.
 
 
 ---
-
-If you are not familiar with this calendar, see the original:
-
-> https://waitbutwhy.com/2014/05/life-weeks.html
-
-![Alt text](src/media/lifeinweeksScience.png)
- 
- ---
   
 ## Thanks to
 
