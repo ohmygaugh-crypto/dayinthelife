@@ -6,7 +6,7 @@ import {
     Setting,
     WorkspaceLeaf,
   } from "obsidian";
-  import { VIEW_TYPE_CALENDAR } from "./src/Constants";
+  import { VIEW_TYPE_CALENDAR } from "./src/TheOnlyConstantInLifeIsChange";
   import { MyLifeView } from "./src/LifeCalendarView";
   
   import moment from "moment";
@@ -18,14 +18,12 @@ import {
     DOB: string;
     calendarYears: number;
     gender: 'Male' | 'Female' | 'Other';
-    netWorth: number;
 }
 
 const DEFAULT_SETTINGS: MyLifePluginSettings = {
     DOB: '2000-01-01',
     calendarYears: 60,
     gender: 'Male',
-    netWorth: 0,
 };
 
 export default class MyLifePlugin extends Plugin {
@@ -118,18 +116,5 @@ class CalendarSettingTab extends PluginSettingTab {
                         await this.plugin.saveSettings();
                     })
             );
-
-        const netWorthSettings = new Setting(containerEl)
-            .setName("Net Worth")
-            .setDesc(`$${this.plugin.settings.netWorth}`)
-            .addText((text) => 
-                text
-                    .setValue(this.plugin.settings.netWorth.toString())
-                    .onChange(async (value) => {
-                        this.plugin.settings.netWorth = parseInt(value);
-                        netWorthSettings.setDesc(`$${value}`);
-                        await this.plugin.saveSettings();
-                    })
-            );
-    }
+        }
 }

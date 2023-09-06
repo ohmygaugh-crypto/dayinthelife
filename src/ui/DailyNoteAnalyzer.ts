@@ -4,11 +4,13 @@ export function isDailyNoteFormat(filename: string): boolean {
     return /^\d{4}-\d{2}-\d{2}$/.test(filename);
 }
 
-export async function analyzeNoteContent(file: TFile): Promise<number> {
+export async function analyzeNoteContent(file: TFile): Promise<{ wordCount: number, backlinks: number, tags: number, hyperlinks: number }> {
     const content = await window.app.vault.read(file);
-    // For simplicity, let's just return the word count for now
-    // You can expand this to analyze other aspects of the content
-    return content.split(/\s+/).length;
+    const wordCount = content.split(/\s+/).length;
+    const backlinks = (content.match(/\[\[[^\]]+\]\]/g) || []).length;
+    const tags = (content.match(/#[^\s#]+/g) || []).length;
+    const hyperlinks = (content.match(/https?:\/\/[^\s]+/g) || []).length;
+    return { wordCount, backlinks, tags, hyperlinks };
 }
 
 export async function generateCalendarData(): Promise<any[]> {
@@ -23,10 +25,13 @@ export async function generateCalendarData(): Promise<any[]> {
 
     const calendarData = [];
     for (const note of dailyNotes) {
-        const value = await analyzeNoteContent(note);
+        const { wordCount, backlinks, tags, hyperlinks } = await analyzeNoteContent(note);
         calendarData.push({
             day: note.basename,
-            value: value
+            value: wordCount,
+            backlinks: backlinks,
+            tags: tags,
+            hyperlinks: hyperlinks
         });
     }
 

@@ -1,7 +1,7 @@
 import { Calendar } from '@nivo/calendar'
 import React from 'react';
 import * as obsidian from 'obsidian';
-//import CustomTooltip from './CustomTooltip';
+import CustomTooltip from './CustomTooltip';
 import { generateCalendarData, openObsidianDailyNote } from './DailyNoteAnalyzer';
 
 // Assuming you have Obsidian's types available, you might need to adjust types based on your setup.
@@ -50,7 +50,7 @@ export const MyResponsiveCalendarCanvas: React.FC = () => {
         fetchData();
     }, []);
 
-    const settings = window.app.plugins.plugins["obsidian-life-in-weeks3"].settings;
+    const settings = window.app.plugins.plugins["day-in-the-life"].settings;
     
     const currentYear = new Date().getFullYear();
     const birthYear = new Date(settings.DOB).getFullYear();
@@ -92,7 +92,7 @@ return (
     <Calendar
         data={calendarData}
         onClick={handleDayClick}
-       // tooltip={CustomTooltip}
+        tooltip={CustomTooltip}
         from={from}
         to={to}
         emptyColor="#gggggg"

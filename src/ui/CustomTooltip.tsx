@@ -1,15 +1,25 @@
-// CustomTooltip.tsx
-
 import React from 'react';
-// import { CustomTooltipComponent } from '@nivo/calendar';?
 
-const CustomTooltip: React.FC<any> = (data) => {
-    console.log(data);
+interface CustomTooltipProps {
+    day: string;
+    value: number | null;
+    backlinks: number;
+    tags: number;
+    hyperlinks: number;
+}
+
+const CustomTooltip: React.FC<CustomTooltipProps> = ({ day, value, backlinks, tags, hyperlinks }) => {
     return (
-        <div>
-            <strong>{data.date}</strong>
+        <div style={{ padding: '12px', color: 'white', background: 'rgba(0, 0, 0, 0.8)' }}>
+            <strong>{day}</strong>
             <br />
-            {data.value} value
+            {value ? `Word Count: ${value}` : 'No data'}
+            <br />
+            {`Backlinks: ${backlinks}`}
+            <br />
+            {`Tags: ${tags}`}
+            <br />
+            {`Hyperlinks: ${hyperlinks}`}
         </div>
     );
 };

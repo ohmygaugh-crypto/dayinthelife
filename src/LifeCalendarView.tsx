@@ -1,6 +1,6 @@
 import { ItemView, WorkspaceLeaf } from "obsidian";
 import MyLifePlugin from "../main";
-import { VIEW_TYPE_CALENDAR } from "./Constants";
+import { VIEW_TYPE_CALENDAR } from "./TheOnlyConstantInLifeIsChange";
 import React from "react";
 import ReactDOM from "react-dom";
 import { MyLifeElement } from "./ui/MyLifeElement";
