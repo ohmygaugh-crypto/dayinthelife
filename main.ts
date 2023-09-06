@@ -6,7 +6,7 @@ import {
     Setting,
     WorkspaceLeaf,
   } from "obsidian";
-  import { VIEW_TYPE_CALENDAR } from "./src/Constants";
+  import { VIEW_TYPE_CALENDAR } from "./src/TheOnlyConstantInLifeIsChange";
   import { MyLifeView } from "./src/LifeCalendarView";
   
   import moment from "moment";
