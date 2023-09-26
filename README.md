@@ -59,6 +59,7 @@ etc.
 - Run `npm build`
 - Edit this app locally: `npm run dev`
 - Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+- NOTE: While in your finder, you made need to "unhide" the ".obsidian" directory by using command+shift+. on the keyboard of your macOS.  
 
   
 
