@@ -4,32 +4,7 @@ import * as obsidian from 'obsidian';
 import CustomTooltip from './CustomTooltip';
 import { generateCalendarData, openObsidianDailyNote } from './DailyNoteAnalyzer';
 
-// Assuming you have Obsidian's types available, you might need to adjust types based on your setup.
-declare const window: any;
-// This is a placeholder function. You'll need to implement the actual logic to open a note in Obsidian.
-const openObsidianDailyNote = (filename: string) => {
-    // Get the current app instance
-    const app = window.app;
-
-    // Check if the note already exists in the vault
-    const file = app.vault.getAbstractFileByPath(filename);
-
-    // Create a new leaf (tab)
-    const newLeaf = app.workspace.splitActiveLeaf();
-
-    if (file instanceof obsidian.TFile) {
-        // If the note exists, open it in the new leaf
-        newLeaf.openFile(file);
-    } else {
-        // If the note doesn't exist, create it and then open it in the new leaf
-        app.vault.create(filename, "").then((newFile) => {
-            newLeaf.openFile(newFile);
-        });
-    }
-};
-
-
-export const MyResponsiveCalendarCanvas: React.FC = () => { 
+export const MyResponsiveCalendarCanvas: React.FC<{ app: any }> = ({ app }) => { 
 
  const handleDayClick = (day: any) => {
     console.log("Clicked on:", day.date); // Debug log
@@ -37,7 +12,7 @@ export const MyResponsiveCalendarCanvas: React.FC = () => {
     const formattedDate = day.date.toISOString().split('T')[0];
     const dailyNoteFilename = `${formattedDate}.md`;
     // Navigate to the daily note in Obsidian
-    openObsidianDailyNote(dailyNoteFilename);
+    openObsidianDailyNote(app, dailyNoteFilename);
     };
 
     const [calendarData, setCalendarData] = React.useState([]);
@@ -50,7 +25,7 @@ export const MyResponsiveCalendarCanvas: React.FC = () => {
         fetchData();
     }, []);
 
-    const settings = window.app.plugins.plugins["day-in-the-life"].settings;
+    const settings = app.plugins.plugins["day-in-the-life"].settings;
     
     const currentYear = new Date().getFullYear();
     const birthYear = new Date(settings.DOB).getFullYear();
@@ -74,7 +49,7 @@ export const MyResponsiveCalendarCanvas: React.FC = () => {
     const to = `${birthYear + lifespan}-12-31`;
 
  // Adjust the Theme Based on System Theme
- const isDarkMode = window.app.workspace.appearance === "dark";
+ const isDarkMode = app.workspace.appearance === "dark";
  const textColor = isDarkMode ? "#ffffff" : "#000000";
 
  const customTheme = {

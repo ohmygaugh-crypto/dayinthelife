@@ -11,7 +11,7 @@ export class MyLifeElement extends React.Component<MyLifeElementProps> {
     return (
       <>
         <div>
-          <MyResponsiveCalendarCanvas />
+          <MyResponsiveCalendarCanvas app={this.props.plugin.app} />
         </div>
       </>
     );
